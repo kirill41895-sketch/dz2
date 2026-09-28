@@ -1,4 +1,4 @@
-﻿#include <iostream>
+#include <iostream>
 #include <string>
 #include <random>
 #include <chrono>
@@ -93,7 +93,7 @@ template <typename T>
 struct Measurement {
     std::chrono::system_clock::time_point time;
     T value;
-    double error;
+    T error;
 
     friend std::ostream& operator<<(std::ostream& os, const Measurement& m) {
         std::time_t t_c = std::chrono::system_clock::to_time_t(m.time);
@@ -106,7 +106,7 @@ struct Measurement {
 
         os << "[" << ts << "] "
             << std::fixed << std::setprecision(2) << m.value.value << " " << T::suffix()
-            << " (err: " << std::setprecision(3) << m.error << ")";
+            << " (err: " << std::setprecision(3) << m.error.value << ")";
         return os;
     }
 };
@@ -147,7 +147,7 @@ namespace Devices {
             return Measurement<QuantityType>{
                 std::chrono::system_clock::now(),
                     QuantityType{ val },
-                    err
+                    QuantityType{ err }
             };
         }
 
