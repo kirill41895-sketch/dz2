@@ -142,7 +142,7 @@ namespace Devices {
             std::uniform_real_distribution<double> dist(range_min, range_max);
             double val = dist(gen);
 
-            double err = (accuracy_class / 100.0) * range_max;
+            double err = (accuracy_class / 100.0) * (range_max - range_min);
 
             return Measurement<QuantityType>{
                 std::chrono::system_clock::now(),
